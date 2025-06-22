@@ -10,5 +10,7 @@
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "jsxSingleQuote": true,
-  "quoteProps": "as-needed"
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "insertPragma": false
 } 
