@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Chip,
-} from '@mui/material';
+import { Grid, Card, CardContent, Typography, Box, Chip } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 import { ArbitrageData } from '../data/mockData';
 import { formatPrice, formatAmount, formatSpread } from '../utils/formatters';
@@ -17,26 +10,39 @@ interface ArbitrageCardProps {
   flashingElements: Set<string>;
 }
 
-export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElements }) => {
+export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
+  data,
+  flashingElements,
+}) => {
   const t = useTranslations();
 
   const getExchangeBadgeColor = (exchange: string) => {
     switch (exchange.toLowerCase()) {
-      case 'binance': return '#22d3ee'; // cyan-300
-      case 'okx': return '#bbf7d0'; // green-200
-      case 'coinbase': return '#c7d2fe'; // indigo-200
-      case 'kraken': return '#ddd6fe'; // purple-200
-      default: return '#d1d5db'; // gray-300
+      case 'binance':
+        return '#22d3ee'; // cyan-300
+      case 'okx':
+        return '#bbf7d0'; // green-200
+      case 'coinbase':
+        return '#c7d2fe'; // indigo-200
+      case 'kraken':
+        return '#ddd6fe'; // purple-200
+      default:
+        return '#d1d5db'; // gray-300
     }
   };
 
   const getExchangeTextColor = (exchange: string) => {
     switch (exchange.toLowerCase()) {
-      case 'binance': return '#1e40af'; // blue-800
-      case 'okx': return '#166534'; // green-800
-      case 'coinbase': return '#3730a3'; // indigo-800
-      case 'kraken': return '#6b21a8'; // purple-800
-      default: return '#374151'; // gray-700
+      case 'binance':
+        return '#1e40af'; // blue-800
+      case 'okx':
+        return '#166534'; // green-800
+      case 'coinbase':
+        return '#3730a3'; // indigo-800
+      case 'kraken':
+        return '#6b21a8'; // purple-800
+      default:
+        return '#374151'; // gray-700
     }
   };
 
@@ -44,32 +50,39 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
   if (data.no_chance) {
     return (
       <Grid item xs={12} md={6}>
-        <Card 
-          sx={{ 
+        <Card
+          sx={{
             background: '#271e2d',
             border: '1px solid #374151',
             borderRadius: 2,
-            transition: 'all 0.3s ease'
+            transition: 'all 0.3s ease',
           }}
         >
           <CardContent sx={{ p: 3 }}>
             {/* Trading Pair Header */}
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  color: '#f1f5f9', 
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                mb: 2,
+              }}
+            >
+              <Typography
+                variant='h6'
+                sx={{
+                  color: '#f1f5f9',
                   fontWeight: 600,
-                  fontSize: '1.1rem'
+                  fontSize: '1.1rem',
                 }}
               >
                 {data.pair}
               </Typography>
-              <Typography 
-                variant="body2" 
-                sx={{ 
+              <Typography
+                variant='body2'
+                sx={{
                   color: '#94a3b8',
-                  fontSize: '0.8rem'
+                  fontSize: '0.8rem',
                 }}
               >
                 {data.currency}
@@ -77,41 +90,54 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
             </Box>
 
             {/* Trading Section - Left/Right Layout */}
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2.5, gap: 2 }}>
+            <Box
+              sx={{ display: 'flex', alignItems: 'center', mb: 2.5, gap: 2 }}
+            >
               {/* Buy Section - Left */}
               <Box sx={{ flex: 1, textAlign: 'center' }}>
                 <Chip
-                  label="-"
+                  label='-'
                   sx={{
                     backgroundColor: '#6b7280',
                     color: '#ffffff',
                     fontWeight: 600,
                     fontSize: '0.9rem',
                     textTransform: 'uppercase',
-                    mb: 1.5
+                    mb: 1.5,
                   }}
                 />
                 <Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 0.5, gap: 1 }}>
-                    <Typography variant="body1" sx={{ fontWeight: 700, color: '#6b7280' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mb: 0.5,
+                      gap: 1,
+                    }}
+                  >
+                    <Typography
+                      variant='body1'
+                      sx={{ fontWeight: 700, color: '#6b7280' }}
+                    >
                       -
                     </Typography>
                     <Chip
                       label={t.buy}
-                      size="small"
+                      size='small'
                       sx={{
                         backgroundColor: 'rgba(16, 185, 129, 0.2)',
                         color: '#10b981',
-                        fontWeight: 700
+                        fontWeight: 700,
                       }}
                     />
                   </Box>
                   <Typography
-                    variant="h3"
+                    variant='h3'
                     sx={{
                       fontWeight: 700,
                       color: '#6b7280',
-                      fontSize: { xs: '1.5rem', md: '2rem' }
+                      fontSize: { xs: '1.5rem', md: '2rem' },
                     }}
                   >
                     -
@@ -125,37 +151,48 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
               {/* Sell Section - Right */}
               <Box sx={{ flex: 1, textAlign: 'center' }}>
                 <Chip
-                  label="-"
+                  label='-'
                   sx={{
                     backgroundColor: '#6b7280',
                     color: '#ffffff',
                     fontWeight: 600,
                     fontSize: '0.9rem',
                     textTransform: 'uppercase',
-                    mb: 1.5
+                    mb: 1.5,
                   }}
                 />
                 <Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 0.5, gap: 1 }}>
-                    <Typography variant="body1" sx={{ fontWeight: 700, color: '#6b7280' }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      mb: 0.5,
+                      gap: 1,
+                    }}
+                  >
+                    <Typography
+                      variant='body1'
+                      sx={{ fontWeight: 700, color: '#6b7280' }}
+                    >
                       -
                     </Typography>
                     <Chip
                       label={t.sell}
-                      size="small"
+                      size='small'
                       sx={{
                         backgroundColor: 'rgba(244, 114, 182, 0.2)',
                         color: '#f472b6',
-                        fontWeight: 700
+                        fontWeight: 700,
                       }}
                     />
                   </Box>
                   <Typography
-                    variant="h3"
+                    variant='h3'
                     sx={{
                       fontWeight: 700,
                       color: '#6b7280',
-                      fontSize: { xs: '1.5rem', md: '2rem' }
+                      fontSize: { xs: '1.5rem', md: '2rem' },
                     }}
                   >
                     -
@@ -165,21 +202,21 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
             </Box>
 
             {/* Profit/Spread */}
-            <Box 
-              sx={{ 
+            <Box
+              sx={{
                 background: '#312d3c',
                 border: '1px solid rgba(239, 68, 68, 0.3)',
                 borderRadius: 3,
-                p: 2, 
-                textAlign: 'center'
+                p: 2,
+                textAlign: 'center',
               }}
             >
-              <Typography 
-                variant="h4"
-                sx={{ 
+              <Typography
+                variant='h4'
+                sx={{
                   fontWeight: 700,
                   color: '#f87171',
-                  mb: 0.5
+                  mb: 0.5,
                 }}
               >
                 {t.noArbitrageChance}
@@ -194,32 +231,39 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
   // Normal arbitrage opportunity display
   return (
     <Grid item xs={12} md={6}>
-      <Card 
-        sx={{ 
+      <Card
+        sx={{
           background: '#271e2d',
           border: '1px solid #374151',
           borderRadius: 2,
-          transition: 'all 0.3s ease'
+          transition: 'all 0.3s ease',
         }}
       >
         <CardContent sx={{ p: 3 }}>
           {/* Trading Pair Header */}
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                color: '#f1f5f9', 
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              mb: 2,
+            }}
+          >
+            <Typography
+              variant='h6'
+              sx={{
+                color: '#f1f5f9',
                 fontWeight: 600,
-                fontSize: '1.1rem'
+                fontSize: '1.1rem',
               }}
             >
               {data.pair}
             </Typography>
-            <Typography 
-              variant="body2" 
-              sx={{ 
+            <Typography
+              variant='body2'
+              sx={{
                 color: '#94a3b8',
-                fontSize: '0.8rem'
+                fontSize: '0.8rem',
               }}
             >
               {data.currency}
@@ -238,49 +282,53 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
                   fontWeight: 700,
                   fontSize: '0.9rem',
                   textTransform: 'uppercase',
-                  mb: 1.5
+                  mb: 1.5,
                 }}
               />
               <Box>
-                <Box 
-                  sx={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
                     mb: 0.5,
                     gap: 1,
-                    animation: flashingElements.has(`${data.pair}-buy-amount`) ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)' : 'none',
+                    animation: flashingElements.has(`${data.pair}-buy-amount`)
+                      ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)'
+                      : 'none',
                     borderRadius: 1,
                     padding: '4px 8px',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
                   }}
                 >
-                  <Typography 
-                    variant="body1" 
+                  <Typography
+                    variant='body1'
                     sx={{ fontWeight: 700, color: '#fcd34d' }}
                   >
                     {formatAmount(data.amount, data.pair)}
                   </Typography>
                   <Chip
                     label={t.buy}
-                    size="small"
+                    size='small'
                     sx={{
                       backgroundColor: 'rgba(16, 185, 129, 0.2)',
                       color: '#10b981',
-                      fontWeight: 700
+                      fontWeight: 700,
                     }}
                   />
                 </Box>
                 <Typography
-                  variant="h3"
+                  variant='h3'
                   sx={{
                     fontWeight: 700,
                     color: 'text.primary',
                     fontSize: { xs: '1.5rem', md: '2rem' },
-                    animation: flashingElements.has(`${data.pair}-buy-price`) ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)' : 'none',
+                    animation: flashingElements.has(`${data.pair}-buy-price`)
+                      ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)'
+                      : 'none',
                     borderRadius: 1,
                     padding: '4px 8px',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
                   }}
                 >
                   {formatPrice(data.buy_price)}
@@ -301,49 +349,53 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
                   fontWeight: 700,
                   fontSize: '0.9rem',
                   textTransform: 'uppercase',
-                  mb: 1.5
+                  mb: 1.5,
                 }}
               />
               <Box>
-                <Box 
-                  sx={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
                     mb: 0.5,
                     gap: 1,
-                    animation: flashingElements.has(`${data.pair}-sell-amount`) ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)' : 'none',
+                    animation: flashingElements.has(`${data.pair}-sell-amount`)
+                      ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)'
+                      : 'none',
                     borderRadius: 1,
                     padding: '4px 8px',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
                   }}
                 >
-                  <Typography 
-                    variant="body1" 
+                  <Typography
+                    variant='body1'
                     sx={{ fontWeight: 700, color: '#fcd34d' }}
                   >
                     {formatAmount(data.amount, data.pair)}
                   </Typography>
                   <Chip
                     label={t.sell}
-                    size="small"
+                    size='small'
                     sx={{
                       backgroundColor: 'rgba(244, 114, 182, 0.2)',
                       color: '#f472b6',
-                      fontWeight: 700
+                      fontWeight: 700,
                     }}
                   />
                 </Box>
                 <Typography
-                  variant="h3"
+                  variant='h3'
                   sx={{
                     fontWeight: 700,
                     color: 'text.primary',
                     fontSize: { xs: '1.5rem', md: '2rem' },
-                    animation: flashingElements.has(`${data.pair}-sell-price`) ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)' : 'none',
+                    animation: flashingElements.has(`${data.pair}-sell-price`)
+                      ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)'
+                      : 'none',
                     borderRadius: 1,
                     padding: '4px 8px',
-                    transition: 'all 0.3s ease'
+                    transition: 'all 0.3s ease',
                   }}
                 >
                   {formatPrice(data.sell_price)}
@@ -353,25 +405,27 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
           </Box>
 
           {/* Profit/Spread */}
-          <Box 
-            sx={{ 
+          <Box
+            sx={{
               background: '#312d3c',
               border: '1px solid rgba(96, 165, 250, 0.1)',
               borderRadius: 3,
-              p: 2, 
-              textAlign: 'center'
+              p: 2,
+              textAlign: 'center',
             }}
           >
-            <Typography 
-              variant="h4"
-              sx={{ 
+            <Typography
+              variant='h4'
+              sx={{
                 fontWeight: 700,
                 color: '#6ee7b7',
                 mb: 0.5,
-                animation: flashingElements.has(`${data.pair}-spread`) ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)' : 'none',
+                animation: flashingElements.has(`${data.pair}-spread`)
+                  ? 'flash 1.2s cubic-bezier(0.4, 0, 0.6, 1)'
+                  : 'none',
                 borderRadius: 1,
                 padding: '4px 8px',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.3s ease',
               }}
             >
               {formatSpread(data.spread, data.currency)}
@@ -381,4 +435,4 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({ data, flashingElem
       </Card>
     </Grid>
   );
-}; 
+};

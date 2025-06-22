@@ -10,4 +10,4 @@ root.render(
   <React.StrictMode>
     <CryptoArbDetector />
   </React.StrictMode>
-); 
+);

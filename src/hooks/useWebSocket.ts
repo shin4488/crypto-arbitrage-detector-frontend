@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { ArbitrageData } from '../data/mockData';
 
 export const useWebSocket = () => {
-  const [arbitrageData, setArbitrageData] = useState<Record<string, ArbitrageData>>({});
+  const [arbitrageData, setArbitrageData] = useState<
+    Record<string, ArbitrageData>
+  >({});
   const [wsConnected, setWsConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
 
@@ -17,21 +19,26 @@ export const useWebSocket = () => {
           setWsConnected(true);
         };
 
-        wsRef.current.onmessage = (event) => {
+        wsRef.current.onmessage = event => {
           try {
             const data: ArbitrageData = JSON.parse(event.data);
             console.log('Received WebSocket data:', data);
-            console.log('Spread type:', typeof data.spread, 'Value:', data.spread);
-            
+            console.log(
+              'Spread type:',
+              typeof data.spread,
+              'Value:',
+              data.spread
+            );
+
             // タイムスタンプを追加してデータ更新を確実に検知
             const dataWithTimestamp = {
               ...data,
-              _updateTime: Date.now()
+              _updateTime: Date.now(),
             };
-            
+
             setArbitrageData(prev => ({
               ...prev,
-              [data.pair]: dataWithTimestamp
+              [data.pair]: dataWithTimestamp,
             }));
           } catch (error) {
             console.error('Error parsing WebSocket data:', error);
@@ -64,6 +71,6 @@ export const useWebSocket = () => {
 
   return {
     arbitrageData,
-    wsConnected
+    wsConnected,
   };
-}; 
+};

@@ -5,7 +5,7 @@ export type Language = 'en' | 'ja';
 export interface Translations {
   // Main title
   title: string;
-  
+
   // Table headers
   tradingPair: string;
   buyExchange: string;
@@ -14,16 +14,16 @@ export interface Translations {
   sellPrice: string;
   amount: string;
   profitSpread: string;
-  
+
   // Status messages
   connecting: string;
   searchingOpportunities: string;
   noArbitrageChance: string;
-  
+
   // Exchange names
   binance: string;
   okx: string;
-  
+
   // Common terms
   buy: string;
   sell: string;
@@ -37,7 +37,7 @@ const translations: Record<Language, Translations> = {
     title: 'CryptoArb Detector',
     tradingPair: 'Trading Pair',
     buyExchange: 'Buy Exchange',
-    sellExchange: 'Sell Exchange', 
+    sellExchange: 'Sell Exchange',
     buyPrice: 'Buy Price',
     sellPrice: 'Sell Price',
     amount: 'Amount',
@@ -51,7 +51,7 @@ const translations: Record<Language, Translations> = {
     sell: 'Sell',
     profit: 'Profit',
     spread: 'Spread',
-    amount_unit: 'Amount'
+    amount_unit: 'Amount',
   },
   ja: {
     title: 'クリプトアービトラージ検出器',
@@ -71,18 +71,18 @@ const translations: Record<Language, Translations> = {
     sell: '売り',
     profit: '利益',
     spread: 'スプレッド',
-    amount_unit: '数量'
-  }
+    amount_unit: '数量',
+  },
 };
 
 // Detect browser language
 export const detectLanguage = (): Language => {
   const browserLang = navigator.language.toLowerCase();
-  
+
   if (browserLang.startsWith('ja')) {
     return 'ja';
   }
-  
+
   return 'en'; // Default to English
 };
 
@@ -95,4 +95,4 @@ export const getTranslations = (lang?: Language): Translations => {
 // Hook for using translations in components
 export const useTranslations = (lang?: Language) => {
   return getTranslations(lang);
-}; 
+};
