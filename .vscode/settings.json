@@ -29,11 +29,12 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.trimTrailingWhitespace": false
   },
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": false,
   "eslint.enable": true,
   "eslint.format.enable": true,
   "typescript.preferences.importModuleSpecifier": "relative"
-} 
+}
