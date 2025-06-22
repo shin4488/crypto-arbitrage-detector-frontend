@@ -1,8 +1,10 @@
 module.exports = {
   extends: [
     'react-app',
-    'react-app/jest'
+    'react-app/jest',
+    'prettier' // Prettierとの競合を防ぐ
   ],
+  plugins: ['prettier'],
   rules: {
     // console.log を警告として表示
     'no-console': 'warn',
@@ -10,6 +12,9 @@ module.exports = {
     // 'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     
     // その他の推奨ルール
-    'no-debugger': 'warn'
+    'no-debugger': 'warn',
+    
+    // Prettier ルール
+    'prettier/prettier': 'error'
   }
 }; 
