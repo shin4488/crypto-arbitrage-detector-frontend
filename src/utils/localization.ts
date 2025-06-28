@@ -34,7 +34,7 @@ export interface Translations {
 
 const translations: Record<Language, Translations> = {
   en: {
-    title: 'CryptoArb Detector',
+    title: 'Crypto Arbitrage Detector',
     tradingPair: 'Trading Pair',
     buyExchange: 'Buy Exchange',
     sellExchange: 'Sell Exchange',
@@ -54,7 +54,7 @@ const translations: Record<Language, Translations> = {
     amount_unit: 'Amount',
   },
   ja: {
-    title: 'クリプトアービトラージ検出器',
+    title: 'Crypto Arbitrage Detector',
     tradingPair: '取引ペア',
     buyExchange: '買い取引所',
     sellExchange: '売り取引所',

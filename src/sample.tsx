@@ -9,7 +9,7 @@ import {
   ThemeProvider,
   CssBaseline,
 } from '@mui/material';
-import { Search } from '@mui/icons-material';
+import { FlashOn } from '@mui/icons-material';
 import { ArbitrageData } from './data/mockData';
 import { darkTheme } from './theme/darkTheme';
 import { useWebSocket } from './hooks/useWebSocket';
@@ -36,7 +36,7 @@ const CryptoArbDetector: React.FC = () => {
         <Container maxWidth='lg'>
           {/* ヘッダー */}
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>
-            <Search sx={{ mr: 1, color: '#38bdf8', fontSize: '2rem' }} />
+            <FlashOn sx={{ mr: 1, color: '#38bdf8', fontSize: '2rem' }} />
             <Typography
               variant='h4'
               component='h1'
