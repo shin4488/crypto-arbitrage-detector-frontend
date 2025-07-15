@@ -32,13 +32,37 @@ export const formatPrice = (price: number | any): string => {
   return result;
 };
 
+// Extract base currency from trading pair (e.g., "BTC/USDT" -> "BTC")
+export const getBaseCurrency = (pair: string): string => {
+  if (!pair) return '';
+  const parts = pair.split('/');
+  return parts[0] || '';
+};
+
 export const formatAmount = (amount: number | any, pair?: string): string => {
   const numAmount =
     typeof amount === 'number' ? amount : parseFloat(String(amount) || '0');
   if (isNaN(numAmount)) {
     return '0';
   }
-  return String(numAmount);
+  
+  // Extract base currency from pair (e.g., "BTC/USDT" -> "BTC")
+  const baseCurrency = pair ? getBaseCurrency(pair) : '';
+  
+  // Format with appropriate decimal places based on currency
+  let formattedAmount: string;
+  if (baseCurrency === 'BTC') {
+    formattedAmount = numAmount.toFixed(8); // BTC: 8 decimal places
+  } else if (baseCurrency === 'ETH') {
+    formattedAmount = numAmount.toFixed(6); // ETH: 6 decimal places
+  } else {
+    formattedAmount = numAmount.toFixed(4); // Default: 4 decimal places
+  }
+  
+  // Remove trailing zeros
+  formattedAmount = parseFloat(formattedAmount).toString();
+  
+  return baseCurrency ? `${formattedAmount} ${baseCurrency}` : formattedAmount;
 };
 
 export const formatCrypto = (amount: number | any, symbol: string): string => {
