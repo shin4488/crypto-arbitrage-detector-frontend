@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <CryptoArbDetector />
-  </React.StrictMode>
+  // </React.StrictMode>
 );

@@ -22,6 +22,11 @@ const CryptoArbDetector: React.FC = () => {
   const flashingElements = useFlashAnimation(arbitrageData);
   const t = useTranslations();
 
+  // デバッグ用ログ
+  React.useEffect(() => {
+    console.log('🎯 CryptoArbDetector - arbitrageData updated:', arbitrageData);
+  }, [arbitrageData]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -68,13 +73,17 @@ const CryptoArbDetector: React.FC = () => {
                 </Card>
               </Grid>
             ) : (
-              Object.values(arbitrageData).map((data: ArbitrageData) => (
-                <ArbitrageCard
-                  key={data.pair}
-                  data={data}
-                  flashingElements={flashingElements}
-                />
-              ))
+              Object.values(arbitrageData).map((data: ArbitrageData) => {
+                // デバッグ用ログ
+                console.log(`🔍 Rendering ArbitrageCard for ${data.pair}:`, data);
+                return (
+                  <ArbitrageCard
+                    key={data.pair}
+                    data={data}
+                    flashingElements={flashingElements}
+                  />
+                );
+              })
             )}
           </Grid>
         </Container>

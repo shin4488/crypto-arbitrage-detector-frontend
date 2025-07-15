@@ -11,12 +11,25 @@ export const getExchangeColor = (
 };
 
 export const formatPrice = (price: number | any): string => {
-  const numPrice =
-    typeof price === 'number' ? price : parseFloat(String(price) || '0');
+  const numPrice = typeof price === 'number' ? price : parseFloat(String(price) || '0');
   if (isNaN(numPrice)) {
-    return '$0.00';
+    return '$0';
   }
-  return `$${numPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  // デバッグログ
+  console.log(`🔢 formatPrice - input: ${price} (${typeof price}), parsed: ${numPrice}`);
+
+  // 精度を保つために、適切な小数点桁数でフォーマット
+  // 暗号通貨の価格は通常、小数点以下の桁数が重要
+  const formatted = numPrice.toLocaleString('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 8, // 暗号通貨の精度に合わせて8桁まで
+    useGrouping: true
+  });
+
+  const result = `$${formatted}`;
+  console.log(`🔢 formatPrice - result: ${result}`);
+  return result;
 };
 
 export const formatAmount = (amount: number | any, pair?: string): string => {
@@ -25,19 +38,7 @@ export const formatAmount = (amount: number | any, pair?: string): string => {
   if (isNaN(numAmount)) {
     return '0';
   }
-
-  // Set decimal places based on trading pair from Binance and OKX specifications
-  let decimalPlaces = 3; // default
-
-  if (pair) {
-    if (pair.includes('BTC')) {
-      decimalPlaces = 5; // BTC/USDT: 5 decimal places
-    } else if (pair.includes('ETH')) {
-      decimalPlaces = 4; // ETH/USDT: 4 decimal places
-    }
-  }
-
-  return numAmount.toFixed(decimalPlaces);
+  return String(numAmount);
 };
 
 export const formatCrypto = (amount: number | any, symbol: string): string => {
@@ -56,16 +57,16 @@ export const formatSpread = (
   const numSpread =
     typeof spread === 'number' ? spread : parseFloat(String(spread) || '0');
   if (isNaN(numSpread)) {
-    return `+0.00 ${currency}`;
+    return `+0 ${currency}`;
   }
-  return `+${numSpread.toFixed(2)} ${currency}`;
+  return `+${numSpread} ${currency}`;
 };
 
 export const formatSpreadRatio = (ratio: number | any): string => {
   const numRatio =
     typeof ratio === 'number' ? ratio : parseFloat(String(ratio) || '0');
   if (isNaN(numRatio)) {
-    return '+0.00%';
+    return '+0%';
   }
-  return `+${(numRatio * 100).toFixed(2)}%`;
+  return `+${numRatio * 100}%`;
 };

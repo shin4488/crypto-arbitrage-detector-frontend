@@ -22,13 +22,7 @@ export const useWebSocket = () => {
         wsRef.current.onmessage = event => {
           try {
             const data: ArbitrageData = JSON.parse(event.data);
-            console.log('Received WebSocket data:', data);
-            console.log(
-              'Spread type:',
-              typeof data.spread,
-              'Value:',
-              data.spread
-            );
+            console.log('🔌 Received WebSocket data:', data);
 
             // タイムスタンプを追加してデータ更新を確実に検知
             const dataWithTimestamp = {
@@ -36,10 +30,17 @@ export const useWebSocket = () => {
               _updateTime: Date.now(),
             };
 
-            setArbitrageData(prev => ({
-              ...prev,
-              [data.pair]: dataWithTimestamp,
-            }));
+            console.log('🔄 Updating state with data:', dataWithTimestamp);
+
+            setArbitrageData(prev => {
+              const newData = {
+                ...prev,
+                [data.pair]: dataWithTimestamp,
+              };
+              console.log('📊 New arbitrageData state:', newData);
+              console.log('📊 Previous arbitrageData state:', prev);
+              return newData;
+            });
           } catch (error) {
             console.error('Error parsing WebSocket data:', error);
           }

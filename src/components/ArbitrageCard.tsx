@@ -16,6 +16,13 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
 }) => {
   const t = useTranslations();
 
+  // デバッグ用ログ
+  React.useEffect(() => {
+    console.log(`💳 ArbitrageCard ${data.pair} - received data:`, data);
+    console.log(`💳 ArbitrageCard ${data.pair} - buy_price:`, data.buy_price, typeof data.buy_price);
+    console.log(`💳 ArbitrageCard ${data.pair} - formatted buy_price:`, formatPrice(data.buy_price));
+  }, [data]);
+
   const getExchangeBadgeColor = (exchange: string) => {
     switch (exchange.toLowerCase()) {
       case 'binance':
