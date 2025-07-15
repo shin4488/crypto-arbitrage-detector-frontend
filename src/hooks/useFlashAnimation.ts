@@ -20,7 +20,7 @@ export const useFlashAnimation = (
       console.log(`🎬 Processing pair: ${pair}`);
 
       const prevData = prevDataRef.current[pair];
-      
+
       // Create a unique string representation for comparison
       const currentDataString = JSON.stringify({
         buy_price: data.buy_price,
@@ -29,14 +29,14 @@ export const useFlashAnimation = (
         spread: data.spread,
         buy_exchange: data.buy_exchange,
         sell_exchange: data.sell_exchange,
-        no_chance: data.no_chance
+        no_chance: data.no_chance,
       });
-      
+
       const prevDataString = dataStringRef.current[pair];
-      
+
       console.log(`🎬 ${pair} - prevDataString:`, prevDataString);
       console.log(`🎬 ${pair} - currentDataString:`, currentDataString);
-      
+
       // Check if this is actually new data
       const isNewData = currentDataString !== prevDataString;
       console.log(`🎬 ${pair} - isNewData: ${isNewData}`);
@@ -47,21 +47,24 @@ export const useFlashAnimation = (
           // Convert to numbers for comparison
           const prevNum = Number(prev);
           const currentNum = Number(current);
-          
+
           // Use a small epsilon for floating point comparison
           const epsilon = 1e-10;
           const changed = Math.abs(prevNum - currentNum) > epsilon;
-          
+
           if (changed) {
-            console.log(`📈 ${fieldName} changed: ${prevNum} -> ${currentNum} (diff: ${Math.abs(prevNum - currentNum)})`);
+            console.log(
+              `📈 ${fieldName} changed: ${prevNum} -> ${currentNum} (diff: ${Math.abs(prevNum - currentNum)})`
+            );
           }
           return changed;
         };
 
         // Check for exchange changes (always trigger animation)
-        const exchangeChanged = prevData.buy_exchange !== data.buy_exchange || 
-                               prevData.sell_exchange !== data.sell_exchange;
-        
+        const exchangeChanged =
+          prevData.buy_exchange !== data.buy_exchange ||
+          prevData.sell_exchange !== data.sell_exchange;
+
         if (exchangeChanged) {
           console.log(`🔄 Exchange changed for ${pair}`);
           newFlashingElements.add(`${pair}-buy-price`);
@@ -97,7 +100,9 @@ export const useFlashAnimation = (
 
         // Check for no_chance status change
         if (prevData.no_chance !== data.no_chance) {
-          console.log(`🔄 No chance status changed for ${pair}: ${prevData.no_chance} -> ${data.no_chance}`);
+          console.log(
+            `🔄 No chance status changed for ${pair}: ${prevData.no_chance} -> ${data.no_chance}`
+          );
           newFlashingElements.add(`${pair}-spread`);
         }
       } else if (!prevData) {
@@ -129,6 +134,9 @@ export const useFlashAnimation = (
     prevDataRef.current = { ...arbitrageData };
   }, [arbitrageData]);
 
-  console.log(`🎬 useFlashAnimation returning flashingElements:`, flashingElements);
+  console.log(
+    `🎬 useFlashAnimation returning flashingElements:`,
+    flashingElements
+  );
   return flashingElements;
 };

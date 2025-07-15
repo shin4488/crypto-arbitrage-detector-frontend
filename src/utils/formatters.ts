@@ -11,20 +11,23 @@ export const getExchangeColor = (
 };
 
 export const formatPrice = (price: number | any): string => {
-  const numPrice = typeof price === 'number' ? price : parseFloat(String(price) || '0');
+  const numPrice =
+    typeof price === 'number' ? price : parseFloat(String(price) || '0');
   if (isNaN(numPrice)) {
     return '$0';
   }
 
   // デバッグログ
-  console.log(`🔢 formatPrice - input: ${price} (${typeof price}), parsed: ${numPrice}`);
+  console.log(
+    `🔢 formatPrice - input: ${price} (${typeof price}), parsed: ${numPrice}`
+  );
 
   // 精度を保つために、適切な小数点桁数でフォーマット
   // 暗号通貨の価格は通常、小数点以下の桁数が重要
   const formatted = numPrice.toLocaleString('en-US', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 8, // 暗号通貨の精度に合わせて8桁まで
-    useGrouping: true
+    useGrouping: true,
   });
 
   const result = `$${formatted}`;
@@ -45,10 +48,10 @@ export const formatAmount = (amount: number | any, pair?: string): string => {
   if (isNaN(numAmount)) {
     return '0';
   }
-  
+
   // Extract base currency from pair (e.g., "BTC/USDT" -> "BTC")
   const baseCurrency = pair ? getBaseCurrency(pair) : '';
-  
+
   // Format with appropriate decimal places based on currency
   let formattedAmount: string;
   if (baseCurrency === 'BTC') {
@@ -58,10 +61,10 @@ export const formatAmount = (amount: number | any, pair?: string): string => {
   } else {
     formattedAmount = numAmount.toFixed(4); // Default: 4 decimal places
   }
-  
+
   // Remove trailing zeros
   formattedAmount = parseFloat(formattedAmount).toString();
-  
+
   return baseCurrency ? `${formattedAmount} ${baseCurrency}` : formattedAmount;
 };
 

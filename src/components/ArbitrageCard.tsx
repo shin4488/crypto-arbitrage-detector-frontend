@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Card, CardContent, Typography, Box, Chip } from '@mui/material';
 import { ArrowForward } from '@mui/icons-material';
 import { ArbitrageData } from '../data/mockData';
-import { formatPrice, formatAmount, formatSpread, getBaseCurrency } from '../utils/formatters';
+import { formatPrice, formatAmount, formatSpread } from '../utils/formatters';
 import { useTranslations } from '../utils/localization';
 
 interface ArbitrageCardProps {
@@ -19,8 +19,15 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
   // デバッグ用ログ
   React.useEffect(() => {
     console.log(`💳 ArbitrageCard ${data.pair} - received data:`, data);
-    console.log(`💳 ArbitrageCard ${data.pair} - buy_price:`, data.buy_price, typeof data.buy_price);
-    console.log(`💳 ArbitrageCard ${data.pair} - formatted buy_price:`, formatPrice(data.buy_price));
+    console.log(
+      `💳 ArbitrageCard ${data.pair} - buy_price:`,
+      data.buy_price,
+      typeof data.buy_price
+    );
+    console.log(
+      `💳 ArbitrageCard ${data.pair} - formatted buy_price:`,
+      formatPrice(data.buy_price)
+    );
   }, [data]);
 
   const getExchangeBadgeColor = (exchange: string) => {
@@ -84,15 +91,6 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
                 }}
               >
                 {data.pair}
-              </Typography>
-              <Typography
-                variant='body2'
-                sx={{
-                  color: '#94a3b8',
-                  fontSize: '0.8rem',
-                }}
-              >
-                {data.currency}
               </Typography>
             </Box>
 
@@ -266,15 +264,6 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
             >
               {data.pair}
             </Typography>
-            <Typography
-              variant='body2'
-              sx={{
-                color: '#94a3b8',
-                fontSize: '0.8rem',
-              }}
-            >
-              {data.currency}
-            </Typography>
           </Box>
 
           {/* Trading Section - Left/Right Layout */}
@@ -308,7 +297,9 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}>
+                  <Box
+                    sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}
+                  >
                     <Typography
                       variant='body1'
                       sx={{ fontWeight: 700, color: '#fcd34d' }}
@@ -377,7 +368,9 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}>
+                  <Box
+                    sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}
+                  >
                     <Typography
                       variant='body1'
                       sx={{ fontWeight: 700, color: '#fcd34d' }}
@@ -436,7 +429,7 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
                 letterSpacing: '0.5px',
               }}
             >
-              利益
+              {t.profit.toUpperCase()}
             </Typography>
             <Typography
               variant='h4'
@@ -452,7 +445,7 @@ export const ArbitrageCard: React.FC<ArbitrageCardProps> = ({
                 transition: 'all 0.3s ease',
               }}
             >
-              +{formatSpread(data.spread, data.currency)}
+              {formatSpread(data.spread, data.currency)}
             </Typography>
           </Box>
         </CardContent>

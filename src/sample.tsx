@@ -75,7 +75,10 @@ const CryptoArbDetector: React.FC = () => {
             ) : (
               Object.values(arbitrageData).map((data: ArbitrageData) => {
                 // デバッグ用ログ
-                console.log(`🔍 Rendering ArbitrageCard for ${data.pair}:`, data);
+                console.log(
+                  `🔍 Rendering ArbitrageCard for ${data.pair}:`,
+                  data
+                );
                 return (
                   <ArbitrageCard
                     key={data.pair}
